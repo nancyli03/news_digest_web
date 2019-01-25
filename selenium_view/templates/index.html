@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>News Compare</title>
+</head>
+<body>
+<select>
+   {% for v in values %}
+
+        <option value="{{ v.date }}">{{ v.date }}</option>
+    {% endfor %}
+</select>
+
+<ul>
+    {% for v in values %}
+        {% for value in v.values %}
+            {% autoescape off %}
+        <li>
+         <a href="{{ value.news_url }}">{{ value.news_title }}</a>
+        </li>
+            {% endautoescape %}
+            {% endfor %}
+    {% endfor %}
+
+</ul>
+</body>
+</html>

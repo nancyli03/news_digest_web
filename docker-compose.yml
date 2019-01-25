@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  db:
+      image: postgres:latest
+      environment:
+          POSTGRES_USER: 'docker'
+          POSTGRES_PASSWORD: 'docker'
+      volumes:
+        - ./CreateDB.sql:/docker-entrypoint-initdb.d/CreateDB.sql
+  web:
+    build: .
+    command: /bin/bash -c 'sleep 20; /code/start_web.sh'
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
